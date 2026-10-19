@@ -31,7 +31,7 @@ const getHtmlInputs = () => {
 
 export default defineConfig(() => {
   return {
-    base: '/GamingDock5.0-/',
+    base: process.env.BASE_PATH || './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

@@ -78,9 +78,30 @@ export const normalizePath = (pathname: string): string => {
   if (!pathname) return '/';
 
   const base = getBaseUrl();
+  const baseNoTrailing = base.endsWith('/') ? base.slice(0, -1) : base;
+
+  // Exact match with repository base without trailing slash (e.g. '/Gamingdockrebuild-')
+  if (baseNoTrailing && pathname === baseNoTrailing) {
+    return '/';
+  }
+
   if (base !== '/' && pathname.startsWith(base)) {
     const stripped = pathname.slice(base.length - 1);
     return stripped === '' ? '/' : stripped;
+  }
+
+  if (baseNoTrailing && baseNoTrailing !== '/' && pathname.startsWith(`${baseNoTrailing}/`)) {
+    const stripped = pathname.slice(baseNoTrailing.length);
+    return stripped === '' ? '/' : stripped;
+  }
+
+  // Fallback: If single segment that isn't a known page and does not end with .html
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length === 1) {
+    const seg = segments[0];
+    if (!knownRootPages.has(seg) && !seg.endsWith('.html')) {
+      return '/';
+    }
   }
 
   return pathname;

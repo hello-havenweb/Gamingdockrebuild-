@@ -1,0 +1,8 @@
+{
+  "name": "Gaming Dock - PC Games Discovery & Catalog",
+  "description": "Premium dark-themed PC gaming discovery hub featuring curated catalogs, verified specs, official links, and responsive game pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
